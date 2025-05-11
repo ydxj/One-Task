@@ -30,13 +30,25 @@ Ce backend est conçu avec :
 ```bash
 git clone https://github.com/ydxj/One-Task.git
 cd One-Task
-cd Backend
 ```
+### installer les dependences:
 
-### 2. Installer les dépendances
 ```bash
+cd frontend
 npm install
 ```
+
+```bash
+cd ..
+cd Backend
+npm install
+```
+
+#### Cree la base de donner a l'aide de migration
+```bash
+npm run migrate
+```
+
 
 ### 3. Créer un fichier .env
 Créer un fichier .env à la racine du projet avec ce contenu de .env.example et Remplace les valeurs par tes vraies infos de connexion MySQL et ton API Key SendGrid.
