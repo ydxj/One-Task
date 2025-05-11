@@ -23,7 +23,8 @@ export default function Signup() {
         }
 
         try {
-            const response = await axios.post('http://localhost:5000/signup', {
+            console.log({ name, email, password });
+            const response = await axios.post('http://localhost:5000/createUser', {
                 name,
                 email,
                 password,
@@ -50,7 +51,7 @@ export default function Signup() {
                         <div className="mb-3">
                             <label htmlFor="name" className="form-label">Name</label>
                             <input
-                                type="name"
+                                type="text"
                                 id="name"
                                 className="form-control"
                                 value={name}

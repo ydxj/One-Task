@@ -9,16 +9,19 @@ export async function CreateUser(user) {
   const { name, email, password } = user;
     // Hash the password before storing it
     const hashedPassword = await bcrypt.hash(password, 10);
-    await db.query(
+    const newUser = await db.query(
         "INSERT INTO users (name, email, password, created_at, updated_at) VALUES (?, ?, ?, NOW(), NOW())",
         [name, email, hashedPassword],
         (err, result) => {
             if (err) {
-                return { error: err };
+                reject(err); 
+            } else {
+                resolve(result); 
             }
-            return { success: true, userId: result.insertId };
         }
     );
+    return { success: true, userId: newUser.insertId };
+
 }
 
 export async function ModifierProductivity(id, productivity) {

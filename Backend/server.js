@@ -1,5 +1,6 @@
 import e from "express";
 import dotenv from "dotenv";
+import cors from "cors";
 import { CreateUser, ModifierUser, GetUserByEmail, ModifierProductivity, GetAllTasks, CreateTask } from "./CrudFunction.js";
 
 dotenv.config();
@@ -9,6 +10,11 @@ const app = e();
 app.use(e.json());
 app.use(e.urlencoded({ extended: true }));
 
+app.use(cors({
+    origin: ['http://localhost:3000'],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+}));
 
 app.get('/',(req,res)=>{
     res.send("Bonjour dans le backend ! ");
@@ -28,12 +34,19 @@ app.post('/login',async (req,res)=>{
 );
 app.post('/createUser',async (req,res)=>{
     const { name, email, password } = req.body;
-    const user = { name, email, password };
-    const result = await CreateUser(user);
-    if (result.error) {
-        res.status(500).json({ error: result.error });
-    } else {
+    try{
+        const existingUser = await GetUserByEmail(email);
+        if (existingUser) {
+            return res.status(400).json({ error: "User already exists" });
+        }
+        const user = { name, email, password };
+        const result = await CreateUser(user);
+        if (result.error) {
+            return res.status(500).json({ error: result.error });
+        }
         res.status(201).json({ success: true, userId: result.userId });
+    } catch (err) {
+        console.log("server erreur")
     }
 })
 
