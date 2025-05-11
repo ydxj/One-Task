@@ -37,7 +37,7 @@ app.post('/createUser',async (req,res)=>{
     try{
         const existingUser = await GetUserByEmail(email);
         if (existingUser) {
-            return res.status(400).json({ error: "User already exists" });
+            return res.json({ message: "User already exists" });
         }
         const user = { name, email, password };
         const result = await CreateUser(user);
