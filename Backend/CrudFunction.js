@@ -10,7 +10,7 @@ export async function CreateUser(user) {
     // Hash the password before storing it
     const hashedPassword = await bcrypt.hash(password, 10);
     await db.query(
-        "INSERT INTO users (name, email, password) VALUES (?, ?, ?)",
+        "INSERT INTO users (name, email, password, created_at, updated_at) VALUES (?, ?, ?, NOW(), NOW())",
         [name, email, hashedPassword],
         (err, result) => {
             if (err) {
@@ -23,7 +23,7 @@ export async function CreateUser(user) {
 
 export async function ModifierProductivity(id, productivity) {
     await db.query(
-        "UPDATE users SET productivity = ? WHERE id = ?",
+        "UPDATE users SET productivity = ? updated_at = NOW() WHERE id = ?",
         [productivity, id],
         (err, result) => {
             if (err) {
@@ -39,7 +39,7 @@ export async function ModifierUser(user,id){
     // Hash the password before storing it
     const hashedPassword = await bcrypt.hash(password, 10);
     await db.query(
-        "UPDATE users SET name = ?, email = ?, password = ? WHERE id = ?",
+        "UPDATE users SET name = ?, email = ?, password = ?, updated_at = NOW() WHERE id = ?",
         [name, email, hashedPassword, id],
         (err, result) => {
             if (err) {
