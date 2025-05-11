@@ -18,9 +18,17 @@ async function createDatabase() {
                 updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
             )
         `);
-        console.log("✅ Table created or already exists");
+        await db.query(`
+            CREATE TABLE IF NOT EXISTS tasks (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                domain VARCHAR(50) NOT NULL,        
+                content TEXT NOT NULL,          
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            );
+        `);
+        console.log("✅ Tables created or already exists");
     } catch (err) {
-        console.error("❌ Error creating table:", err);
+        console.error("❌ Error creating tables:", err);
     }
 }
 

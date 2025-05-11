@@ -56,3 +56,20 @@ export async function GetUserByEmail(email) {
     }
     return rows[0];
 }
+export async function CreateTask(task) {
+    const { domain, content } = task;
+    await db.query(
+        "INSERT INTO tasks (domain, content, created_at) VALUES (?, ?, NOW())",
+        [domain, content],
+        (err, result) => {
+            if (err) {
+                return { error: err };
+            }
+            return { success: true, taskId: result.insertId };
+        }
+    );
+}
+export async function GetAllTasks() {
+    const [rows] = await db.query("SELECT * FROM tasks");
+    return rows;
+}

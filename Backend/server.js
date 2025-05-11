@@ -1,6 +1,6 @@
 import e from "express";
 import dotenv from "dotenv";
-import { CreateUser, ModifierUser, GetUserByEmail, ModifierProductivity } from "./CrudFunction.js";
+import { CreateUser, ModifierUser, GetUserByEmail, ModifierProductivity, GetAllTasks, CreateTask } from "./CrudFunction.js";
 
 dotenv.config();
 const port = process.env.PORT ;
@@ -60,7 +60,26 @@ app.put('/modifierUser/:id',async (req,res)=>{
     } else {
         res.status(200).json({ success: true });
     }
-})
+}),
+
+app.post('/createTask',async (req,res)=>{
+    const { domain, content } = req.body;
+    const task = { domain, content };
+    const result = await CreateTask(task);
+    if (result.error) {
+        res.status(500).json({ error: result.error });
+    } else {
+        res.status(201).json({ success: true, taskId: result.taskId });
+    }
+});
+app.get('/getAllTasks',async (req,res)=>{
+    const result = await GetAllTasks();
+    if (result.error) {
+        res.status(500).json({ error: result.error });
+    } else {
+        res.status(200).json({ success: true, tasks: result.tasks });
+    }
+});
 
 app.listen( port ,()=>{
     console.log(`Backend running on ${process.env.BASE_URL}`)
