@@ -4,6 +4,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "start": "nodemon server.js",
+    "migrate": "node ./migration/migration.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
