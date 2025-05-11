@@ -4,72 +4,59 @@ import "./home.css";
 function Home() {
 
   return (
-    <div className="container py-5">
-      <header className="text-center mb-5">
-        <h1 className="text-primary display-4 mb-3">OneTask</h1>
-        <p className="lead">Un service simple qui vous envoie une petite tâche chaque jour par email ✉️</p>
-      </header>
-
-      <section className="text-center mb-5">
-        <h2 className="h4 mb-3">Comment ça marche ?</h2>
-        <p className="mb-4">
-          L'utilisateur s'inscrit, choisit un domaine comme la productivité, l'anglais, la programmation, etc.,
-          et reçoit chaque jour une petite tâche par email adaptée à ses choix.
-        </p>
-        <div>
-          <button className="btn btn-primary me-2">Commencer</button>
-          <button className="btn btn-outline-primary">En savoir plus</button>
-        </div>
-      </section>
-
-      <section className="mb-5">
-        <h2 className="h5 text-center mb-4">Domaines disponibles</h2>
-        <div className="row text-center g-4">
-          <div className="col-md-4">
-            <div className="bg-light p-3 rounded">
-              <FaTasks size={30} color="#0d6efd" className="mb-2" />
-              <div>Productivité</div>
-            </div>
-          </div>
-          <div className="col-md-4">
-            <div className="bg-light p-3 rounded">
-              <FaLanguage size={30} color="#6610f2" className="mb-2" />
-              <div>Anglais</div>
-            </div>
-          </div>
-          <div className="col-md-4">
-            <div className="bg-light p-3 rounded">
-              <FaCode size={30} color="#198754" className="mb-2" />
-              <div>Programmation</div>
-            </div>
-          </div>
-          <div className="col-md-4">
-            <div className="bg-light p-3 rounded">
-              <FaLightbulb size={30} color="#fd7e14" className="mb-2" />
-              <div>Conseils tech</div>
-            </div>
-          </div>
-          <div className="col-md-4">
-            <div className="bg-light p-3 rounded">
-              <FaHeartbeat size={30} color="#dc3545" className="mb-2" />
-              <div>Santé & sport</div>
-            </div>
-          </div>
-          <div className="col-md-4">
-            <div className="bg-light p-3 rounded">
-              <FaUserCircle size={30} color="#20c997" className="mb-2"  />
-              <div>Développement personnel</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="text-center" style={{ backgroundColor: "#e9f5ff" }}>
-        <h2 className="h5 mb-3">Témoignages</h2>
-        <blockquote className="fst-italic mb-2">"Un service simple mais super utile... chaque matin, une petite tâche pour progresser !"</blockquote>
-        <blockquote className="fst-italic">"J’adore recevoir mes tâches directement dans ma boîte mail !"</blockquote>
-      </section>
+    <div>
+  {/* Hero Section */}
+  <header className="text-center py-5 mb-5" style={{ backgroundColor: "#f8f9fa" }}>
+    <section className="section text-center container">
+      <h1 className="text-primary display-4 mb-3">OneTask</h1>
+      <p className="lead">Un service simple qui vous envoie une petite tâche chaque jour par email ✉️</p>
+    </section>
+    <div className="mt-4">
+      <button className="btn btn-primary me-3">Commencer</button>
+      <button className="btn btn-outline-secondary">En savoir plus</button>
     </div>
+  </header>
+
+  {/* Comment ça marche */}
+  
+
+  {/* Domaines */}
+  <section className="section section-light">
+    <div className="container text-center">
+      <h2 className="h5 mb-5 text-dark">Domaines disponibles</h2>
+      <div className="row g-4">
+        {[
+          { icon: <FaTasks size={30} color="#0d6efd" />, label: "Productivité" },
+          { icon: <FaLanguage size={30} color="#6610f2" />, label: "Anglais" },
+          { icon: <FaCode size={30} color="#198754" />, label: "Programmation" },
+          { icon: <FaLightbulb size={30} color="#fd7e14" />, label: "Conseils tech" },
+          { icon: <FaHeartbeat size={30} color="#dc3545" />, label: "Santé & sport" },
+          { icon: <FaUserCircle size={30} color="#20c997" />, label: "Développement personnel" },
+        ].map((domain, i) => (
+          <div className="col-md-4" key={i}>
+            <div className="bg-white p-4 rounded domain-card h-100 shadow-sm">
+              <div className="mb-2">{domain.icon}</div>
+              <div className="fw-semibold">{domain.label}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* Témoignages */}
+  <section className="section bg-light text-center">
+    <div className="container" style={{ backgroundColor: "#e9f5ff", padding: "20px", borderRadius: "20px" }}>
+      <h2 className="h5 mb-4 text-primary">Témoignages</h2>
+      <blockquote className="fst-italic mb-3">
+        "Un service simple mais super utile... chaque matin, une petite tâche pour progresser !"
+      </blockquote>
+      <blockquote className="fst-italic">
+        "J’adore recevoir mes tâches directement dans ma boîte mail !"
+      </blockquote>
+    </div>
+  </section>
+</div>
 	
   );
 }

@@ -1,14 +1,10 @@
-import Headers from './TousPages/Layout/header';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Home from './TousPages/PageHome/home';
-import Footer from './TousPages/Layout/footer';
+import AppRouter from './router';
 
 function App() {
   return (
     <div>
-      <Headers/>
-      <Home/>
-      <Footer/>
+      <AppRouter />
     </div>
   );
 }
