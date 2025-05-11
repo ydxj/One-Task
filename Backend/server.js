@@ -1,7 +1,6 @@
 import e from "express";
 import dotenv from "dotenv";
-import { CreateUser, ModifierUser, GetUserByEmail, ModifierProductivity } from "./CrudFunction";
-
+import { CreateUser, ModifierUser, GetUserByEmail, ModifierProductivity } from "./CrudFunction.js";
 
 dotenv.config();
 const port = process.env.PORT ;
@@ -64,5 +63,5 @@ app.put('/modifierUser/:id',async (req,res)=>{
 })
 
 app.listen( port ,()=>{
-    console.log("Back end runing on port: "+port)
+    console.log(`Backend running on ${process.env.BASE_URL}`)
 })
