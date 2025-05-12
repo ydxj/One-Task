@@ -2,7 +2,9 @@ import e from "express";
 import dotenv from "dotenv";
 import bcrypt from "bcrypt";
 import cors from "cors";
+import sessionMiddleware from "./sessionConfig.js";
 import { CreateUser, ModifierUser, GetUserByEmail, ModifierProductivity, GetAllTasks, CreateTask } from "./CrudFunction.js";
+import cookieParser from "cookie-parser";
 
 dotenv.config();
 const port = process.env.PORT ;
@@ -10,6 +12,8 @@ const port = process.env.PORT ;
 const app = e();
 app.use(e.json());
 app.use(e.urlencoded({ extended: true }));
+app.use(cookieParser());
+app.use(sessionMiddleware);
 
 app.use(cors({
     origin: ['http://localhost:3000'],
@@ -20,6 +24,15 @@ app.use(cors({
 app.get('/',(req,res)=>{
     res.send("Bonjour dans le backend ! ");
 })
+
+app.get("/me", (req, res) => {
+  if (req.session.user) {
+    res.json({ loggedIn: true, user: req.session.user });
+  } else {
+    res.json({ loggedIn: false });
+  }
+});
+
 app.post('/login',async (req,res)=>{
     const { email, password } = req.body;
     const data = await GetUserByEmail(email);
@@ -30,7 +43,16 @@ app.post('/login',async (req,res)=>{
     if (!isMatch) {
         return res.status(401).json({ error: "Invalid email or password" });
     }
-    res.status(200).json({ success: true, userId: data.id });
+    // Store user data in session
+    req.session.user = {
+        id: data.id,
+        name: data.name,
+        email: data.email,
+        role: data.role,
+        productivity: data.productivity
+    };
+    // console.log(req.session.user);
+    res.status(200).json({ success: true, userId: data.id, user: req.session.user });
 }
 );
 app.post('/createUser',async (req,res)=>{

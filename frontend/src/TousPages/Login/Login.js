@@ -12,7 +12,7 @@ export default function Login() {
     e.preventDefault();
     setLoading(true);
     setError(null);
-
+    axios.defaults.withCredentials = true;
     try {
       const response = await axios.post("http://localhost:5000/login", {
         email,
