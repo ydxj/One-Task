@@ -76,3 +76,9 @@ export async function GetAllTasks() {
     const [rows] = await db.query("SELECT * FROM tasks");
     return rows;
 }
+
+export async function getUsers() {
+    const [rows] = await db.query("SELECT * FROM users");
+    return [rows];
+
+}
