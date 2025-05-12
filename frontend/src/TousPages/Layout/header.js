@@ -1,5 +1,22 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Headers() {
+  const [user, setUser] = useState(null);
+  const navigate = useNavigate();
+  useEffect(() => {
+    axios.get("http://localhost:5000/me", { withCredentials: true })
+      .then(res => {
+      if (res.data.loggedIn) {
+        setUser(res.data.user);
+      } else {
+        // navigate("/login");
+      }
+    });
+  }, []);
+  
+
   return (
     <div>
       <header className="container py-4">
@@ -10,6 +27,17 @@ function Headers() {
 
           <nav>
             <ul className="nav">
+              {user ? (
+                <div class="btn-group">
+            <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+              {user.name}
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">dashboard</a></li>
+              <li><a class="dropdown-item" href="#">Logout</a></li>
+            </ul>
+          </div> ) : (
+            <>
               <li className="nav-item">
                 <a href="/signUp" className="btn btn-outline-primary mx-2">
                   Sign up
@@ -20,6 +48,8 @@ function Headers() {
                   Login
                 </a>
               </li>
+            </>
+          )}   
             </ul>
           </nav>
         </div>
