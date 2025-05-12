@@ -1,5 +1,6 @@
 import e from "express";
 import dotenv from "dotenv";
+import bcrypt from "bcrypt";
 import cors from "cors";
 import { CreateUser, ModifierUser, GetUserByEmail, ModifierProductivity, GetAllTasks, CreateTask } from "./CrudFunction.js";
 
