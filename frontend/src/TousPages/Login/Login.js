@@ -20,7 +20,11 @@ export default function Login() {
       });
 
       if (response.data.success) {
-        window.location.href = "/dashboard";
+        if (response.data.user.role === "admin") {
+          window.location.href = "/dashboardAdmin";
+        }else(
+          window.location.href = "/dashboard"
+        )
       } else {
         setError(response.data.message || "Login failed");
       }

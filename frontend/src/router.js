@@ -4,8 +4,8 @@ import Home from './TousPages/PageHome/PageHome';
 import Login from './TousPages/Login/Login';
 import Signup from './TousPages/Signup/Signup';
 import NotFound from './TousPages/Layout/404';
-import UserDashboard from './TousPages/User/Dashboard';
-import DashboardAdmin from './TousPages/admin/Dashbord';
+import UserDashboard from './TousPages/User/dashboard/Dashboard';
+import DashboardAdmin from './TousPages/admin/Dashbord/Dashbord';
 
 function AppRouter() {
     return (

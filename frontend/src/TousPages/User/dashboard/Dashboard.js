@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import {FaTasks,FaLanguage,FaCode,FaLightbulb,FaHeartbeat,FaUserCircle} from "react-icons/fa";
-import Sidebar from "../Layout/Menu";
+import Sidebar from "../../Layout/Menu";
 import { useNavigate } from "react-router-dom";
 
 const domains = [
