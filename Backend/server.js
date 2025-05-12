@@ -117,6 +117,18 @@ app.get('/getAllTasks',async (req,res)=>{
     }
 });
 
+app.post("/logout", (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      console.error("❌ Logout error:", err);
+      return res.status(500).json({ message: "Logout failed" });
+    }
+    res.clearCookie("connect.sid"); // default cookie name
+    res.json({ success: true, message: "Logged out successfully" });
+  });
+});
+
+
 app.listen( port ,()=>{
     console.log(`Backend running on ${process.env.BASE_URL}`)
 })

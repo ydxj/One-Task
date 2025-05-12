@@ -15,6 +15,16 @@ function Headers() {
       }
     });
   }, []);
+
+  const handleLogout = async () => {
+    try {
+      await axios.post("http://localhost:5000/logout", {}, { withCredentials: true });
+      window.location.href = "/login";
+    } catch (err) {
+      console.error("Logout failed", err);
+    }
+  };
+
   
 
   return (
@@ -33,8 +43,8 @@ function Headers() {
               {user.name}
             </button>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">dashboard</a></li>
-              <li><a class="dropdown-item" href="#">Logout</a></li>
+              <li><a class="dropdown-item" href="/dashboard">dashboard</a></li>
+              <li><a class="dropdown-item" onClick={handleLogout} style={{ cursor:"pointer" }}>Logout</a></li>
             </ul>
           </div> ) : (
             <>
