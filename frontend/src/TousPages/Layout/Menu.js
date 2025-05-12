@@ -8,11 +8,21 @@ import {
   faChartBar,
   faUser,
   faCog,
+  faSignOutAlt
 } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
 
 export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(true);
 
+  const handleLogout = async () => {
+    try {
+      await axios.post("http://localhost:5000/logout", {}, { withCredentials: true });
+      window.location.href = "/login";
+    } catch (err) {
+      console.error("Logout failed", err);
+    }
+  };
   return (
     <>
       {/* Always-visible open button */}
@@ -86,6 +96,12 @@ export default function Sidebar() {
                 <a href="#settings" className="nav-link text-dark">
                   <FontAwesomeIcon icon={faCog} className="me-2" />
                   Paramètres
+                </a>
+              </li>
+              <li>
+                <a onClick={handleLogout} style={{ cursor:"pointer" }} className="nav-link text-dark">
+                  <FontAwesomeIcon icon={faSignOutAlt} className="me-2" />
+                  logout
                 </a>
               </li>
             </ul>

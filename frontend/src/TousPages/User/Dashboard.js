@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import {FaTasks,FaLanguage,FaCode,FaLightbulb,FaHeartbeat,FaUserCircle} from "react-icons/fa";
 import Sidebar from "../Layout/Menu";
+import { useNavigate } from "react-router-dom";
 
 const domains = [
     { id: "productivity", icon: <FaTasks size={30} color="#0d6efd" />, label: "Productivité" },
@@ -15,11 +16,24 @@ const domains = [
 function UserDashboard() {
     const [selected, setSelected] = useState(null);
     const [submitted, setSubmitted] = useState(false);
+    const [user, setUser] = useState(null);
 
     const handleSelect = (id) => {
         setSelected(id);
         setSubmitted(false);
     };
+    const navigate = useNavigate();
+    useEffect(() => {
+        axios.get("http://localhost:5000/me", { withCredentials: true })
+        .then(res => {
+        if (res.data.loggedIn) {
+            setUser(res.data.user);
+        } else {
+            navigate("/login");
+        }
+        });
+    }, []);
+
 
     const handleSubmit = async () => {
         if (!selected) return;
