@@ -1,5 +1,5 @@
 # One-Task
-# 📝 OneTask – Backend avec Node.js & MySQL
+# 📝 OneTask – Application Fullstack (React + Node.js + MySQL)
 
 OneTask est un service simple d’envoi de tâches quotidiennes par email selon un domaine choisi par l’utilisateur (productivité, apprentissage, sport…).  
 Ce backend est conçu avec :
