@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './TousPages/PageHome/PageHome';
 import Login from './TousPages/Login/Login';
 import Signup from './TousPages/Signup/Signup';
+import NotFound from './TousPages/Layout/404';
 
 function AppRouter() {
     return (
@@ -11,6 +12,9 @@ function AppRouter() {
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
+                
+                {/* Catch-all route for 404 Not Found */}
+                <Route path="*" element={<NotFound />} />
             </Routes>
         </Router>
     );
