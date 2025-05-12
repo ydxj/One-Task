@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import {FaTasks,FaLanguage,FaCode,FaLightbulb,FaHeartbeat,FaUserCircle} from "react-icons/fa";
+import Sidebar from "../Layout/Menu";
 
 const domains = [
     { id: "productivity", icon: <FaTasks size={30} color="#0d6efd" />, label: "Productivité" },
@@ -32,6 +33,7 @@ function UserDashboard() {
 
     return (
         <>
+        <Sidebar />
             <div className="container py-5 text-center">
                 <h2 className="h4 mb-4 text-dark">Choisissez un domaine</h2>
                 <div className="row g-4">
