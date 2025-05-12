@@ -1,21 +1,29 @@
 
 import { FaTasks, FaLanguage, FaCode, FaLightbulb, FaHeartbeat, FaUserCircle } from "react-icons/fa";
 import "./home.css"; 
+import { Link } from "react-router-dom";
 function Home() {
 
   return (
     <div>
   {/* Hero Section */}
-  <header className="text-center py-5 mb-5" style={{ backgroundColor: "#f8f9fa" }}>
-    <section className="section text-center container">
-      <h1 className="text-primary display-4 mb-3">OneTask</h1>
-      <p className="lead">Un service simple qui vous envoie une petite tâche chaque jour par email ✉️</p>
-    </section>
-    <div className="mt-4">
-      <button className="btn btn-primary me-3">Commencer</button>
-      <button className="btn btn-outline-secondary">En savoir plus</button>
-    </div>
-  </header>
+  <header
+  className="text-center py-5 mb-5"
+  style={{
+    background: "linear-gradient(to right, #dbefff, #f0eaff)"
+  }}
+>
+  <section className="section text-center container">
+    <h1 className="text-primary display-4 mb-3">OneTask</h1>
+    <p className="lead">
+      Un service simple qui vous envoie une petite tâche chaque jour par email ✉️
+    </p>
+  </section>
+  <div className="mt-4">
+   <Link to={"/signUp"} ><button className="btn btn-primary me-3">Commencer</button></Link>
+    <button className="btn btn-outline-secondary text-dark">En savoir plus</button>
+  </div>
+</header>
 
   {/* Comment ça marche */}
   
