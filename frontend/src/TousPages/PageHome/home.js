@@ -1,6 +1,7 @@
 
 import { FaTasks, FaLanguage, FaCode, FaLightbulb, FaHeartbeat, FaUserCircle } from "react-icons/fa";
 import "./home.css"; 
+import { Link } from "react-router-dom";
 function Home() {
 
   return (
@@ -19,7 +20,7 @@ function Home() {
     </p>
   </section>
   <div className="mt-4">
-    <button className="btn btn-primary me-3">Commencer</button>
+   <Link to={"/signUp"} ><button className="btn btn-primary me-3">Commencer</button></Link>
     <button className="btn btn-outline-secondary text-dark">En savoir plus</button>
   </div>
 </header>
