@@ -26,7 +26,7 @@ export async function CreateUser(user) {
 
 export async function ModifierProductivity(id, productivity) {
     await db.query(
-        "UPDATE users SET productivity = ? updated_at = NOW() WHERE id = ?",
+        "UPDATE users SET productivity = ?, updated_at = NOW() WHERE id = ?",
         [productivity, id],
         (err, result) => {
             if (err) {

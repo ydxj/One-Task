@@ -4,6 +4,7 @@ import Home from './TousPages/PageHome/PageHome';
 import Login from './TousPages/Login/Login';
 import Signup from './TousPages/Signup/Signup';
 import NotFound from './TousPages/Layout/404';
+import UserDashboard from './TousPages/User/Dashboard';
 
 function AppRouter() {
     return (
@@ -12,7 +13,7 @@ function AppRouter() {
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
-                
+                <Route path="/dashboard" element={<UserDashboard />} />
                 {/* Catch-all route for 404 Not Found */}
                 <Route path="*" element={<NotFound />} />
             </Routes>

@@ -73,9 +73,12 @@ app.post('/createUser',async (req,res)=>{
     }
 })
 
-app.put('/modifierProductivity/:id',async (req,res)=>{
+app.put('/modifierProductivity',async (req,res)=>{
     const { productivity } = req.body;
-    const id = req.params.id;
+    const id = req.session.user.id;
+    if (!id) {
+        return res.status(401).json({ error: "User not authenticated" });
+    }
     const result = await ModifierProductivity(id, productivity);
     if(result.error){
         res.status(500).json({ error: result.error });
