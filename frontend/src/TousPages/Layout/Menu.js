@@ -69,31 +69,19 @@ export default function Sidebar() {
             <hr />
             <ul className="nav nav-pills flex-column mb-auto">
               <li className="nav-item">
-                <a href="#dashboard" className="nav-link active">
+                <a href="/dashboard" className="nav-link active">
                   <FontAwesomeIcon icon={faHome} className="me-2" />
                   Dashboard
                 </a>
               </li>
               <li>
-                <a href="#tasks" className="nav-link text-dark">
-                  <FontAwesomeIcon icon={faTasks} className="me-2" />
-                  Tâches
-                </a>
-              </li>
-              <li>
-                <a href="#stats" className="nav-link text-dark">
-                  <FontAwesomeIcon icon={faChartBar} className="me-2" />
-                  Statistiques
-                </a>
-              </li>
-              <li>
-                <a href="#profile" className="nav-link text-dark">
+                <a href="/profile" className="nav-link text-dark">
                   <FontAwesomeIcon icon={faUser} className="me-2" />
                   Profil
                 </a>
               </li>
               <li>
-                <a href="#settings" className="nav-link text-dark">
+                <a href="/modifier-domaine" className="nav-link text-dark">
                   <FontAwesomeIcon icon={faCog} className="me-2" />
                   Paramètres
                 </a>

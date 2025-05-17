@@ -43,11 +43,12 @@ function UserDashboard() {
     const handleSubmit = async () => {
         if (!selected) return;
         try {
+                        console.log(selected)
+
+            setUser((prevUser) => ({ ...prevUser, productivity: selected }));
             await axios.put("http://localhost:5000/modifierProductivity", { productivity: selected }, { withCredentials: true });
             setSubmitted(true);
-            setTimeout(() => {
-                window.location.reload();
-            }, 2000);
+            setSelected(null);
         } catch (err) {
             console.error("Submission failed", err);
         }
@@ -94,12 +95,34 @@ function UserDashboard() {
                     )}
                 </div>
             ) : (
-                <div className="container py-5 text-center">
-                    <h2 className="h4 mb-4 text-dark">Votre domaine de productivité est : {user.productivity}</h2>
-                    <div className="alert alert-success mt-3">
-                        ✅ Vous avez déjà choisi un domaine !
+                <div className="container py-5 d-flex flex-column align-items-center">
+                <h2 className="display-6 mb-4 text-dark fw-semibold">
+                    Tableau de bord utilisateur
+                </h2>
+
+                <div className="card shadow-lg border-0" style={{ maxWidth: "500px", width: "100%" }}>
+                    <div className="card-body text-center">
+                    <h5 className="card-title text-primary mb-3">
+                        👋 Bonjour, <span className="fw-bold">{user.name}</span>
+                    </h5>
+
+                    <p className="mb-1 text-muted">Domaine de productivité actuel :</p>
+                    <div className="alert alert-info text-capitalize fw-semibold">
+                        {user.productivity}
+                    </div>
+
+                    <button
+                        className="btn btn-outline-primary mt-3"
+                        onClick={() => navigate("/modifier-domaine")}
+                    >
+                        ✏️ Modifier le domaine
+                    </button>
                     </div>
                 </div>
+                </div>
+
+
+
             )}
         </>
     );
