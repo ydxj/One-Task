@@ -58,14 +58,9 @@ function MenuAdmin() {
 
           <ul className="nav flex-column px-2">
             <li className="nav-item mb-2">
-              <Link to="/dashboardAdmin"className="link" >📊 Statistiques</Link>
-            </li>
-            <li className="nav-item mb-2">
               <Link to="/admin/users"  className="link">👤 Utilisateurs</Link>
             </li>
-            <li className="nav-item mb-2">
-              <Link to="/admin/tasks" className="link">📝 Tâches</Link>
-            </li>
+  
             <li className="nav-item mb-2">
               <Link to="/admin/domains" className="link" >📂 Domaines</Link>
             </li>

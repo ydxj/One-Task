@@ -91,3 +91,22 @@ export async function DeleteUser(id) {
     );
 }
 
+
+//update user
+export async function UpdateUser(user, id) {
+  const { name, email, password } = user;
+
+  if (password && password.trim() !== "") {
+    // mettre à jour avec le password
+    await db.query(
+      "UPDATE users SET name = ?, email = ?, password = ? WHERE id = ?",
+      [name, email, password, id],
+    );
+  } else {
+    // mettre à jour sans toucher au password
+    await db.query(
+      "UPDATE users SET name = ?, email = ? WHERE id = ?",
+      [name, email, id],
+    );
+  }
+}

@@ -5,7 +5,8 @@ import Login from './TousPages/Login/Login';
 import Signup from './TousPages/Signup/Signup';
 import NotFound from './TousPages/Layout/404';
 import UserDashboard from './TousPages/User/dashboard/Dashboard';
-import DashboardAdmin from './TousPages/admin/Dashbord/Dashbord';
+import AdminUtilisateur from './TousPages/admin/Dashbord/Dashbord';
+import EditUser from './TousPages/admin/Dashbord/EditUser';
 
 function AppRouter() {
     return (
@@ -15,7 +16,8 @@ function AppRouter() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/dashboard" element={<UserDashboard />} />
-                <Route path="/dashboardAdmin" element={<DashboardAdmin/>} />
+                <Route path="/admin/users" element={<AdminUtilisateur/>} />
+                <Route path="/edit-user/:id" element={<EditUser />} />
                 {/* Catch-all route for 404 Not Found */}
                 <Route path="*" element={<NotFound />} />
             </Routes>

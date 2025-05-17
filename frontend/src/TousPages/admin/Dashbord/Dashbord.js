@@ -1,47 +1,39 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import MenuAdmin from "./menuAdmin";
 import axios from "axios";
 
-function AdminDashboard() {
+function AdminUtilisateur() {
   const [users, setUsers] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
-  axios
-    .get("http://localhost:5000/getUsers")
-    .then((res) => {
-      console.log("Data reçue :", res.data.result); 
-      setUsers(res.data.result[0]); // Assurez-vous que la structure de la réponse est correcte
-    })
-    .catch((err) => console.error("Erreur fetch:", err));
-}, []);
+    axios
+      .get("http://localhost:5000/getUsers")
+      .then((res) => setUsers(res.data.result[0]))
+      .catch((err) => console.error("Erreur fetch:", err));
+  }, []);
 
-
-  // Supprimer utilisateur
   const handleDeleteUser = async (id) => {
     try {
-      const res = await fetch(`http://localhost:5000/deleteUser/${id}`, {
-        method: "DELETE",
-      });
-
-      if (res.ok) {
-        setUsers(users.filter((user) => user.id !== id));
-      } else {
-        console.error("Erreur lors de la suppression");
-      }
+      await axios.delete(`http://localhost:5000/deleteUser/${id}`);
+      setUsers(users.filter((user) => user.id !== id));
     } catch (err) {
-      console.error("Erreur réseau :", err);
+      console.error("Erreur suppression:", err);
     }
+  };
+
+  const handleEditUser = (id) => {
+    navigate(`/edit-user/${id}`);
   };
 
   return (
     <div className="d-flex">
       <MenuAdmin />
       <div className="container-fluid p-4">
-        <h2>📊 Statistiques Générales</h2>
-
-        {/* Users */}
+        <h2>👥 Utilisateurs</h2>
         <div className="card mt-4">
-          <div className="card-header">📋 Derniers utilisateurs</div>
+          <div className="card-header">📋 Liste des utilisateurs</div>
           <div className="card-body">
             <table className="table table-hover">
               <thead>
@@ -53,18 +45,14 @@ function AdminDashboard() {
                 </tr>
               </thead>
               <tbody>
-                {users.map((user) => (
+                {users.filter(user => user.role !== 'admin').map(user => (
                   <tr key={user.id}>
                     <td>{user.name}</td>
                     <td>{user.email}</td>
                     <td>{user.productivity}</td>
                     <td>
-                      <button
-                        className="btn btn-sm btn-danger"
-                        onClick={() => handleDeleteUser(user.id)}
-                      >
-                        Supprimer
-                      </button>
+                      <button className="btn btn-sm btn-warning me-2" onClick={() => handleEditUser(user.id)}>Modifier</button>
+                      <button className="btn btn-sm btn-danger" onClick={() => handleDeleteUser(user.id)}>Supprimer</button>
                     </td>
                   </tr>
                 ))}
@@ -72,13 +60,10 @@ function AdminDashboard() {
             </table>
           </div>
         </div>
-
-        <footer className="text-center mt-5 text-muted small">
-          &copy; 2025 OneTask Admin
-        </footer>
+        <footer className="text-center mt-5 text-muted small">&copy; 2025 OneTask Admin</footer>
       </div>
     </div>
   );
 }
 
-export default AdminDashboard;
+export default AdminUtilisateur;

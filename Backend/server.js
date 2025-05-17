@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import bcrypt from "bcrypt";
 import cors from "cors";
 import sessionMiddleware from "./sessionConfig.js";
-import { CreateUser, ModifierUser, GetUserByEmail, ModifierProductivity, GetAllTasks, CreateTask, getUsers, DeleteUser } from "./CrudFunction.js";
+import { CreateUser, ModifierUser, GetUserByEmail, ModifierProductivity, GetAllTasks, CreateTask, getUsers, DeleteUser, UpdateUser } from "./CrudFunction.js";
 import cookieParser from "cookie-parser";
 
 dotenv.config();
@@ -151,6 +151,35 @@ app.delete('/deleteUser/:id',async(req,res)=>{
         console.log(err);
         return res.status(500).send({error:err});
     }
+});
+
+app.get("/getUser/:id", async (req, res) => {
+  const id = req.params.id;
+  try {
+    const [rows] = await db.query("SELECT * FROM users WHERE id = ?", [id]);
+    if (rows.length > 0) {
+      res.json({ user: rows[0] });
+    } else {
+      res.status(404).json({ error: "Utilisateur introuvable" });
+    }
+  } catch (err) {
+    res.status(500).json({ error: err });
+  }
+});
+
+//  modifier utilisateur
+app.put("/updateUser/:id", async (req, res) => {
+  const id = req.params.id;
+  const { name, email, password } = req.body;
+  const user = { name, email, password };
+
+  try {
+    const result = await UpdateUser(user, id);
+    return res.status(200).json({ result });
+  } catch (err) {
+    console.error("Erreur updateUser:", err.message, err.stack);
+    return res.status(500).json({ error: "Erreur serveur" });
+  }
 });
 
 
