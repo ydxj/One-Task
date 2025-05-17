@@ -76,9 +76,18 @@ export async function GetAllTasks() {
     const [rows] = await db.query("SELECT * FROM tasks");
     return rows;
 }
-
+//get user
 export async function getUsers() {
     const [rows] = await db.query("SELECT * FROM users");
     return [rows];
 
 }
+
+
+//supprimer user
+export async function DeleteUser(id) {
+    await db.query(
+        "DELETE FROM users WHERE id = ?", [id],
+    );
+}
+

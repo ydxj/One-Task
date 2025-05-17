@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import bcrypt from "bcrypt";
 import cors from "cors";
 import sessionMiddleware from "./sessionConfig.js";
-import { CreateUser, ModifierUser, GetUserByEmail, ModifierProductivity, GetAllTasks, CreateTask, getUsers } from "./CrudFunction.js";
+import { CreateUser, ModifierUser, GetUserByEmail, ModifierProductivity, GetAllTasks, CreateTask, getUsers, DeleteUser } from "./CrudFunction.js";
 import cookieParser from "cookie-parser";
 
 dotenv.config();
@@ -130,7 +130,7 @@ app.post("/logout", (req, res) => {
     res.json({ success: true, message: "Logged out successfully" });
   });
 });
-
+//get  users
 app.get('/getUsers',async(req,res)=>{
    try{
      const result= await getUsers();
@@ -140,6 +140,19 @@ app.get('/getUsers',async(req,res)=>{
      return res.status(500).send({error:err});
    }
 })
+
+// Delete user
+app.delete('/deleteUser/:id',async(req,res)=>{
+    const id = req.params.id;
+    try{
+        const result= await DeleteUser(id);
+        return res.status(200).json({result:result});
+    }catch(err){
+        console.log(err);
+        return res.status(500).send({error:err});
+    }
+});
+
 
 app.listen( port ,()=>{
     console.log(`Backend running on ${process.env.BASE_URL}`)
