@@ -53,7 +53,12 @@ function Headers() {
                     {user.name}
                   </button>
                   <ul className="dropdown-menu">
-                    <li><a className="dropdown-item" href="/dashboard">Dashboard</a></li>
+                    {user.role === "admin" ? (
+                      <li><a className="dropdown-item" href="/dashboardAdmin">Admin</a></li>
+                    ):(
+                      <li><a className="dropdown-item" href="/dashboard">Dashboard</a></li>
+                    )
+                    }
                     <li><a className="dropdown-item" onClick={handleLogout} style={{ cursor:"pointer" }}>Logout</a></li>
                   </ul>
                 </div>

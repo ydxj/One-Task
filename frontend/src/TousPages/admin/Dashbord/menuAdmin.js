@@ -65,7 +65,7 @@ function MenuAdmin() {
               <Link to="/admin/domains" className="link" >📂 Domaines</Link>
             </li>
             <li className="nav-item mb-2">
-              <Link to="/admin/settings" className="link">⚙️ Paramètres</Link>
+              <Link to="/profile" className="link">⚙️ Paramètres</Link>
             </li>
              <li><a className="dropdown-item" onClick={handleLogout} style={{ cursor:"pointer" }}>🔓 Déconnecté</a></li>
           </ul>
