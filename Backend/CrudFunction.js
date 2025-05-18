@@ -83,7 +83,14 @@ export async function getUsers() {
 
 }
 
-
+//get user by id
+export async function getUserById(id) {
+    const [rows] = await db.query("SELECT * FROM users WHERE id = ?", [id]);
+    if (rows.length === 0) {
+        return null;
+    }
+    return rows[0];
+}
 //supprimer user
 export async function DeleteUser(id) {
     await db.query(

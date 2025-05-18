@@ -67,7 +67,7 @@ function MenuAdmin() {
             <li className="nav-item mb-2">
               <Link to="/admin/settings" className="link">⚙️ Paramètres</Link>
             </li>
-             <li><a class="dropdown-item" onClick={handleLogout} style={{ cursor:"pointer" }}>🔓 Déconnecté</a></li>
+             <li><a className="dropdown-item" onClick={handleLogout} style={{ cursor:"pointer" }}>🔓 Déconnecté</a></li>
           </ul>
         </>
       )}
