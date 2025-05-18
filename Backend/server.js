@@ -101,16 +101,25 @@ app.put('/modifierUser/:id',async (req,res)=>{
     }
 }),
 
-app.post('/createTask',async (req,res)=>{
-    const { domain, content } = req.body;
-    const task = { domain, content };
-    const result = await CreateTask(task);
-    if (result.error) {
-        res.status(500).json({ error: result.error });
-    } else {
-        res.status(201).json({ success: true, taskId: result.taskId });
-    }
+app.post('/createTask', async (req, res) => {
+	const { domain, content } = req.body;
+	console.log("Reçu:", { domain, content });
+
+	const task = { domain, content };
+	const result = await CreateTask(task);
+
+	if (result && result.error) {
+		console.log("Erreur backend:", result.error);
+		res.status(500).json({ error: "Erreur lors de l'enregistrement" });
+	} else if (result && result.success) {
+		console.log("Tâche créée avec succès");
+		res.status(201).json({ success: true, taskId: result.taskId });
+	} else {
+		res.status(500).json({ error: "Réponse inattendue du serveur" });
+	}
 });
+
+
 app.get('/getAllTasks',async (req,res)=>{
     const result = await GetAllTasks();
     if (result.error) {

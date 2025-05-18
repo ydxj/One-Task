@@ -12,6 +12,7 @@ import EditUser from './TousPages/admin/Dashbord/EditUser';
 import DashboardAdmin from './TousPages/admin/Dashbord/Dashbord';
 import Parametres from './TousPages/User/parametre/parametre';
 import ModifierProfil from './TousPages/Layout/Profile';
+import DomaineForm from './TousPages/admin/Dashbord/Domaine/domaine';
 
 function ProtectedRoute({ children, role }) {
   const [loading, setLoading] = useState(true);
@@ -97,6 +98,7 @@ function AppRouter() {
               <ModifierProfil />
           }
         />
+        <Route path='/admin/domains' element={<DomaineForm />} />
 
         {/* Catch-all 404 */}
         <Route path="*" element={<NotFound />} />
