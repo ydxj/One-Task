@@ -49,11 +49,12 @@ const DomaineForm = () => {
 						required
 					>
 						<option value="">-- Sélectionner --</option>
-						<option value="anglais">Anglais</option>
-						<option value="programmation">Programmation</option>
-						<option value="Santé & Sport">Santé & Sport</option>
-						<option value="Développement personnel">Développement personnel</option>
-						<option value="Conseils tech">Conseils tech</option>
+						<option value="english">english</option>
+						<option value="programming">programming</option>
+						<option value="tech">tech</option>
+						<option value="selfdev">selfdev</option>
+						<option value="health">health</option>
+						<option value="productivity">productivity</option>
 					</select>
 				</div>
 

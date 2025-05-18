@@ -5,6 +5,8 @@ import cors from "cors";
 import sessionMiddleware from "./sessionConfig.js";
 import { CreateUser, ModifierUser, GetUserByEmail, ModifierProductivity, GetAllTasks, CreateTask, getUsers, DeleteUser, UpdateUser, getUserById } from "./CrudFunction.js";
 import cookieParser from "cookie-parser";
+import { sendDailyTasks } from "./cron.js";
+import cron from "node-cron";
 
 dotenv.config();
 const port = process.env.PORT ;
@@ -20,6 +22,16 @@ app.use(cors({
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
 }));
+
+
+await sendDailyTasks();
+
+// Schedule to run every day at 8 AM
+cron.schedule(process.env.DAILY_TASK_CRON, async () => {
+  console.log("📆 Running daily task job...");
+  await sendDailyTasks();
+});
+
 
 app.get('/',(req,res)=>{
     res.send("Bonjour dans le backend ! ");
