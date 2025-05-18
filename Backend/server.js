@@ -24,7 +24,7 @@ app.use(cors({
 }));
 
 
-await sendDailyTasks();
+// await sendDailyTasks();
 
 // Schedule to run every day at 8 AM
 cron.schedule(process.env.DAILY_TASK_CRON, async () => {
